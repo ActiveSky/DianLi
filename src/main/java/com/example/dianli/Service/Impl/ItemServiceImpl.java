@@ -16,6 +16,7 @@ import com.github.yulichang.wrapper.MPJLambdaWrapper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -37,8 +38,10 @@ public class ItemServiceImpl extends ServiceImpl<ItemMapper, Item> implements It
 	@Autowired
 	private HourDDetailService hourS;
 
+	@Cacheable(value = "item", key = "'list'")  //放在缓存中 redis 是以key-value进行存储的
 	@Override
 	public R getItemList() {
+		System.out.println("进入了getItemList方法,没有走缓存");
 		LambdaQueryWrapper<Item> queryWrapper = new LambdaQueryWrapper<>();
 		queryWrapper.select(Item::getId, Item::getName, Item::getType, Item::getDuration, Item::getReleaseTime, Item::getUserCount);
 		List<Item> itemList = itemMapper.selectList(queryWrapper);

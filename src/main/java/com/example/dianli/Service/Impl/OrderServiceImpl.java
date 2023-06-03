@@ -1,18 +1,24 @@
 package com.example.dianli.Service.Impl;
 
 import cn.hutool.json.JSONArray;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.example.dianli.Entity.Item;
 import com.example.dianli.Entity.ItemDetail;
 import com.example.dianli.Entity.Order;
+import com.example.dianli.Entity.Seller;
+import com.example.dianli.Entity.result.OrderAll;
 import com.example.dianli.Entity.result.OrderJustTwo;
 import com.example.dianli.Mapper.ItemMapper;
 import com.example.dianli.Mapper.OrderMapper;
 import com.example.dianli.Service.OrderService;
+import com.example.dianli.Utils.HashUtils;
 import com.example.dianli.common.R;
 import com.github.yulichang.wrapper.MPJLambdaWrapper;
+import com.google.gson.JsonObject;
 import io.swagger.models.auth.In;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;
@@ -38,7 +44,8 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 
 	@Override
 	public R addOrder(Order order) {
-		order.setBlockchainId("11111");
+//		order.setBlockchainId("11111");
+		order.setBlockchainId(HashUtils.hash(order.toString()));
 		System.out.println("order的值为：");
 		System.out.println(order);
 
@@ -114,6 +121,30 @@ public class OrderServiceImpl extends ServiceImpl<OrderMapper, Order> implements
 		JSONArray jsonArray = new JSONArray(newList);
 
 		return R.success("获取成功", jsonArray);
+	}
+
+
+	public R getOrderByBlockId(String blockId){
+
+		MPJLambdaWrapper<Order> lambdaWrapper = new MPJLambdaWrapper<>();
+		lambdaWrapper
+				.select(Order.class,i->!i.getColumn().equals("blockchain_id"))
+				.select(Order::getId)
+				.select(Item::getName,Item::getDuration)
+				.select(Seller::getSellerEmail,Seller::getSellerName,Seller::getSellerPhone,Seller::getSellerAddress)
+				.eq(Order::getBlockchainId, blockId)
+				.innerJoin(Seller.class, Seller::getSellerId, Order::getSellerId)
+				.innerJoin(Item.class, Item::getId, Order::getItemId);
+
+
+		OrderAll orderAll = orderMapper.selectJoinOne(OrderAll.class,lambdaWrapper);
+
+
+
+		JSONObject jsonObject = (JSONObject) JSON.toJSON(orderAll);
+
+
+		return R.success("获取成功", jsonObject);
 	}
 
 

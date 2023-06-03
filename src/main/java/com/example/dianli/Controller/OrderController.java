@@ -5,6 +5,7 @@ import com.example.dianli.Service.OrderService;
 import com.example.dianli.common.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/order")
 @Api(tags = "订单接口")
+
 public class OrderController {
 	@Autowired
 	private OrderService orderService;
@@ -41,6 +43,12 @@ public class OrderController {
 	@ApiOperation(value="获取订单列表", notes="根据商家id获取订单列表")
 	public R getOrderListBySellerId(@RequestParam(value = "sellerId") Integer sellerId) {
 		return orderService.getOrderListBySellerId(sellerId);
+	}
+
+	@GetMapping("/getOrderByBlockId")
+	@ApiOperation(value="获取订单列表", notes="根据区块链id获取订单列表")
+	public R getOrderByBlockId(@RequestParam(value = "blockId") String blockId) {
+		return orderService.getOrderByBlockId(blockId);
 	}
 
 

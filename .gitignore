@@ -32,5 +32,4 @@ build/
 ### VS Code ###
 .vscode/
 
-#区块链暂时不加入
-/src/main/java/com/example/dianli/Utils/generateBlockIdUtils.java
+

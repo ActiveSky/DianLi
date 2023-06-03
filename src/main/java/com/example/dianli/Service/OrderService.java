@@ -17,4 +17,5 @@ public interface OrderService extends IService<Order>{
 	public R deleteOrderById(Integer orderId);
 
 	R getOrderListBySellerId(Integer sellerId);
+	R getOrderByBlockId(String blockId);
 }

@@ -1,11 +1,13 @@
 package com.example.dianli.Entity;
 
+import cn.hutool.core.date.DateTime;
 import com.baomidou.mybatisplus.annotation.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 /**
@@ -28,7 +30,7 @@ public class Order {  //多对多
 	@TableField(value = "seller_id")
 	private Integer sellerId; // 售电公司id
 	@TableField(value = "create_time", fill = FieldFill.INSERT)
-	private Date createTime;  // 创建时间
+	private LocalDateTime createTime;  // 创建时间
 	@TableField(value = "order_time")
 	private Date orderTime; //	预定时间(用户自定义)
 	@TableField(value = "blockchain_id")

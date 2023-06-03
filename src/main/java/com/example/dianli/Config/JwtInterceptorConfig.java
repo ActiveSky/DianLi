@@ -18,8 +18,9 @@ public class JwtInterceptorConfig implements WebMvcConfigurer {
 				.excludePathPatterns("/customer/login")
 				.addPathPatterns("/seller/**")
 				.excludePathPatterns("/seller/login")
-				.addPathPatterns("/order/**");
-
+				.addPathPatterns("/order/**")
+				.addPathPatterns("/item/**")
+				.excludePathPatterns("/item/getItemList");
 
 	}
 

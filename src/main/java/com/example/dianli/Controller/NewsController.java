@@ -4,6 +4,7 @@ import com.example.dianli.Service.NewsService;
 import com.example.dianli.common.R;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/news")
 @Api(tags = "新闻接口")
+
 public class NewsController {
 
 	@Autowired
