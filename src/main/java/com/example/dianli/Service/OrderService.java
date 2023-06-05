@@ -5,6 +5,8 @@ import com.example.dianli.Entity.Order;
 import com.example.dianli.common.R;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
+
 /**
  * @Author JiKuiXie
  * @Date 2023/05/29
@@ -12,10 +14,10 @@ import org.springframework.stereotype.Service;
 
 public interface OrderService extends IService<Order>{
 
-	public R addOrder(Order order);
+	public R addOrder(Order order) throws IOException;
 	public R getOrderListByCustomerId(Integer customerId);
 	public R deleteOrderById(Integer orderId);
 
 	R getOrderListBySellerId(Integer sellerId);
-	R getOrderByBlockId(String blockId);
+	R getOrderByBlockId(String blockId) throws IOException;
 }

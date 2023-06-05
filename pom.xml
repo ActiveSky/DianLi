@@ -14,7 +14,7 @@
 
     <groupId>com.example</groupId>
     <artifactId>DianLi</artifactId>
-    <version>0.2</version>
+    <version>0.4</version>
     <name>DianLi</name>
     <description>DianLi</description>
 
@@ -32,8 +32,13 @@
     <dependencies>
 
 
-        <!--        自己额外添加的工具-->
+        <!--自己额外添加的工具-->
 
+        <dependency>
+            <groupId>com.squareup.okhttp3</groupId>
+            <artifactId>okhttp</artifactId>
+            <version>4.9.1</version>
+        </dependency>
 
         <!-- jwt生成token的库 -->
         <dependency>

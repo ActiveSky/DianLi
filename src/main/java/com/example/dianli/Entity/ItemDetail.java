@@ -23,5 +23,4 @@ public class ItemDetail {
 	private Integer monthDurationId;  //月段id
 	private Integer hourDurationId;  //小时段id
 
-
 }

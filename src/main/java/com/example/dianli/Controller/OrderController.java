@@ -9,6 +9,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 /**
  * @Author JiKuiXie
  * @Date 2023/06/01
@@ -23,7 +25,7 @@ public class OrderController {
 
 	@PostMapping("/addOrder")
 	@ApiOperation(value="添加订单", notes="根据order表添加订单")
-	public R addOrder(@RequestBody  Order order) {
+	public R addOrder(@RequestBody  Order order) throws IOException {
 		return orderService.addOrder(order);
 	}
 
@@ -47,7 +49,7 @@ public class OrderController {
 
 	@GetMapping("/getOrderByBlockId")
 	@ApiOperation(value="获取订单列表", notes="根据区块链id获取订单列表")
-	public R getOrderByBlockId(@RequestParam(value = "blockId") String blockId) {
+	public R getOrderByBlockId(@RequestParam(value = "blockId") String blockId) throws IOException {
 		return orderService.getOrderByBlockId(blockId);
 	}
 

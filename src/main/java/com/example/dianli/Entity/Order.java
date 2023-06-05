@@ -6,6 +6,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
+import org.apache.commons.lang3.builder.ToStringBuilder;
+import org.apache.commons.lang3.builder.ToStringStyle;
 
 import java.time.LocalDateTime;
 import java.util.Date;
@@ -35,6 +37,8 @@ public class Order {  //多对多
 	private Date orderTime; //	预定时间(用户自定义)
 	@TableField(value = "blockchain_id")
 	private String blockchainId;  // 区块链id
+
+
 
 
 	//预定时间
